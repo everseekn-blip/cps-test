@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leal CPS Test</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header id="header">
+            <h1>⚡ LEAL CPS TEST ⚡</h1>
+            <p class="subtitle">How fast can you click?</p>
+        </header>
+
+        <!-- Main Layout: Left Panel | Center | Right Panel -->
+        <div id="main-layout">
+            <!-- Left Side Panel -->
+            <div class="side-panel left-panel">
+                <div class="side-card" id="aim-test-card">
+                    <div class="side-card-header">
+                        <span class="side-icon">🎯</span>
+                        <span class="side-title">Aim Test</span>
+                    </div>
+                    <div class="side-card-body" id="aim-test-area">
+                        <div id="aim-target"></div>
+                        <div id="aim-stats">
+                            <span id="aim-hits">0</span>/<span id="aim-shots">0</span>
+                            <span class="aim-accuracy" id="aim-accuracy">0%</span>
+                        </div>
+                        <button class="side-start-btn" id="aim-start-btn">Başla</button>
+                    </div>
+                </div>
+                <div class="side-card" id="reaction-card">
+                    <div class="side-card-header">
+                        <span class="side-icon">⚡</span>
+                        <span class="side-title">Reaction Test</span>
+                    </div>
+                    <div class="side-card-body" id="reaction-area">
+                        <div id="reaction-box">Hazır mısın?</div>
+                        <div id="reaction-result"></div>
+                        <button class="side-start-btn" id="reaction-start-btn">Başla</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center Area -->
+            <div id="center-area">
+                <!-- CPS Labels -->
+                <div id="cps-labels">
+                    <div class="cps-badge max-cps">
+                        <span class="cps-label">MAX CPS</span>
+                        <span id="max-cps-value" class="cps-value">0</span>
+                    </div>
+                    <div class="cps-badge current-cps">
+                        <span class="cps-label">CURRENT CPS</span>
+                        <span id="current-cps-value" class="cps-value">0</span>
+                    </div>
+                </div>
+
+                <!-- Player Name -->
+                <div id="player-name-container">
+                    <input type="text" id="player-name-input" placeholder="İsmini yaz..." maxlength="16" value="">
+                </div>
+
+                <!-- Click Zone -->
+                <div id="click-zone">
+                    <div id="click-button">
+                        <span class="click-text">CLICK!</span>
+                        <span id="click-count" class="click-count">0 clicks</span>
+                    </div>
+                    <div id="click-ripple-container"></div>
+                </div>
+
+                <!-- Stats Panel -->
+                <div id="stats-panel">
+                    <div class="stat-card">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-info">
+                            <span class="stat-label">Max CPS</span>
+                            <span id="stat-max" class="stat-value">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-info">
+                            <span class="stat-label">Current CPS</span>
+                            <span id="stat-current" class="stat-value">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🖱️</div>
+                        <div class="stat-info">
+                            <span class="stat-label">Total Clicks</span>
+                            <span id="stat-total" class="stat-value">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔥</div>
+                        <div class="stat-info">
+                            <span class="stat-label">Best Streak</span>
+                            <span id="stat-streak" class="stat-value">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timer Bar -->
+                <div id="timer-section">
+                    <div id="timer-bar-container">
+                        <div id="timer-bar"></div>
+                    </div>
+                    <div id="timer-text">Click to start!</div>
+                </div>
+
+                <!-- Mode Selector -->
+                <div id="mode-selector">
+                    <button class="mode-btn" data-time="1">1s</button>
+                    <button class="mode-btn active" data-time="5">5s</button>
+                    <button class="mode-btn" data-time="10">10s</button>
+                    <button class="mode-btn" data-time="30">30s</button>
+                    <button class="mode-btn" data-time="0">∞</button>
+                </div>
+
+                <!-- Buttons Row -->
+                <div id="btn-row">
+                    <button id="leaderboard-btn">🏆 Sıralama</button>
+                    <button id="reset-btn">🔄 Reset</button>
+                </div>
+            </div>
+
+            <!-- Right Side Panel -->
+            <div class="side-panel right-panel">
+                <div class="side-card" id="stability-card">
+                    <div class="side-card-header">
+                        <span class="side-icon">📊</span>
+                        <span class="side-title">Stability Test</span>
+                    </div>
+                    <div class="side-card-body" id="stability-area">
+                        <canvas id="stability-canvas" width="180" height="100"></canvas>
+                        <div id="stability-score">Sapma: --</div>
+                        <button class="side-start-btn" id="stability-start-btn">Başla</button>
+                    </div>
+                </div>
+                <div class="side-card" id="jitter-card">
+                    <div class="side-card-header">
+                        <span class="side-icon">🖱️</span>
+                        <span class="side-title">Jitter Test</span>
+                    </div>
+                    <div class="side-card-body" id="jitter-area">
+                        <div id="jitter-display">
+                            <span id="jitter-value">0</span>
+                            <span class="jitter-unit">ms</span>
+                        </div>
+                        <div id="jitter-label">Ortalama tıklama aralığı</div>
+                        <button class="side-start-btn" id="jitter-start-btn">Başla</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard Overlay -->
+        <div id="leaderboard-overlay">
+            <div id="leaderboard-panel">
+                <div id="leaderboard-header">
+                    <h2>🏆 Sıralama</h2>
+                    <button id="leaderboard-close">✕</button>
+                </div>
+                <div id="leaderboard-tabs">
+                    <button class="lb-tab" data-mode="1">1s</button>
+                    <button class="lb-tab active" data-mode="5">5s</button>
+                    <button class="lb-tab" data-mode="10">10s</button>
+                    <button class="lb-tab" data-mode="30">30s</button>
+                </div>
+                <div id="leaderboard-list">
+                    <div class="lb-loading">Yükleniyor...</div>
+                </div>
+                <button id="submit-score-btn">Skorumu Gönder</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Click Particles Container -->
+    <div id="particles-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
